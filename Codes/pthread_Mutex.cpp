@@ -36,10 +36,10 @@ void* deal_records(void* rank) {
     return NULL;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
         ifstream file;
-        file.open("15611.txt", ios::in);
+        file.open(argv[1], ios::in);
         if (!file.is_open())
         {
             cout << "读取文件失败" << endl;
@@ -49,13 +49,11 @@ int main()
         string buf;
         while (getline(file, buf)) {
             words.push_back(buf);
-            //cout << buf << " ";
         }
         pthread_t thread_handles[NUMBER_OF_THREAD];
         pthread_mutex_init(&mutex, NULL);
         int x[NUMBER_OF_THREAD];
         for (int thread = 0; thread < thread_count; thread++) {
-            //cout << thread << " " << thread_count << endl;
             x[thread] = thread;
             pthread_create(&thread_handles[thread], NULL, deal_records, &x[thread]);
 
@@ -63,9 +61,11 @@ int main()
         for (int i = 0; i < thread_count; i++) {
             pthread_join(thread_handles[i], NULL);
         }
+        //cout << "finished" << endl;
         pthread_mutex_destroy(&mutex);
         ofstream ofs;
-        ofs.open("hw1_out_15611.txt", ios::out);
+        string filename = "hw1_out_" + string(argv[1]);
+        ofs.open(filename, ios::out);
         for (unordered_map<string, vector<string>>::iterator it = record_map.begin(); it != record_map.end(); it++) {
             if (length_record.find(it->second.size()) != length_record.end()) {
                 length_record[it->second.size()]++;
