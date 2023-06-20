@@ -32,11 +32,11 @@ void* deal_records(void* rank) {
     }
     return NULL;
 }
-int main()
+int main(int argc, char* argv[])
 {
     DWORD start_time = GetTickCount();
     ifstream file;
-    file.open("15611.txt", ios::in);
+    file.open(argv[1], ios::in);
     if (!file.is_open())
     {
         cout << "读取文件失败" << endl;
@@ -61,10 +61,10 @@ int main()
         pthread_join(thread_handles[i], NULL);
     }
     cout << "finished" << endl;
-    //free(thread_handles);
     sem_destroy(&sem);
     ofstream ofs;
-    ofs.open("out_15611_test.txt", ios::out);
+    string filename = "hw1_out_samaphore_" + string(argv[1]);
+    ofs.open(filename, ios::out);
     for (unordered_map<string, vector<string>>::iterator it = map.begin(); it != map.end(); it++) {
         if (length_record.find(it->second.size()) != length_record.end()) {
             length_record[it->second.size()]++;
