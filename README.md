@@ -5,4 +5,7 @@ Using pthread/openmp/mpi to solve the problem
 #### Pthread:
 Environment:
 Visual Studio 2019
-(Instruction of Pthread)[https://blog.csdn.net/sijia5135/article/details/115356079]
+
+[Instruction of Pthread](https://blog.csdn.net/sijia5135/article/details/115356079)
+
+[Pthread.zip]
