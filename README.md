@@ -37,3 +37,6 @@ int main(int argc, char* argv[])
     return 0;
 }
 ```
+
+Q：MPI是可以传map类型的吗sos 套娃失败————
+
